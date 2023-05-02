@@ -21,7 +21,7 @@
         </StackPanel>
 
         <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="1">
-            <TextBlock Text="" x:Name="textCaptcha" Foreground="Green" FontSize="32" Background="PaleGreen"></TextBlock>
+            <TextBlock Text="" x:Name="textCaptcha" Foreground="Green" FontSize="32" Background="PaleGreen" TextDecorations="Strikethrough"></TextBlock>
         </StackPanel>        
 
         <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="2">

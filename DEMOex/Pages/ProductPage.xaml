@@ -17,14 +17,33 @@
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-            <ComboBox x:Name="ComboBoxFilterProductDiscountAmount" Margin="0 0 15 0"  SelectionChanged="ComboBoxFilterProductDiscountAmount_SelectionChanged"></ComboBox>
-            <ComboBox x:Name="ComboBoxFilterProductByPrice" SelectionChanged="ComboBoxFilterProductByPrice_SelectionChanged"></ComboBox>
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0 0 0 20">
+
+            <TextBlock x:Name="tbFrom" Text="0"/>
+            <TextBlock Text=" из "/>
+            <TextBlock x:Name="tbTo" Text="100"/>
+
+        </StackPanel>        
+        
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Grid.Row="1">                      
+            <StackPanel Orientation="Vertical" HorizontalAlignment="Left" Margin="0 0 100 0">
+                <TextBlock Text="Сортировка" HorizontalAlignment="Center" FontSize="22" FontWeight="Bold"/>
+                <TextBlock Text="по размеру скидки: " VerticalAlignment="Center"/>
+                <ComboBox x:Name="ComboBoxFilterProductDiscountAmount"  SelectionChanged="ComboBoxFilterProductDiscountAmount_SelectionChanged"></ComboBox>
+                <TextBlock Text="по цене: " VerticalAlignment="Center"/>
+                <ComboBox x:Name="ComboBoxFilterProductByPrice" SelectionChanged="ComboBoxFilterProductByPrice_SelectionChanged"></ComboBox>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" >
+                <TextBlock Text="Поиск: "/>
+                <TextBox x:Name="tbSearch" TextChanged="tbSearch_TextChanged" VerticalAlignment="Top"></TextBox>
+            </StackPanel>
         </StackPanel>
         
-        <ListView ScrollViewer.HorizontalScrollBarVisibility="Hidden" x:Name="lvProducts" HorizontalAlignment="Center" Grid.Row="1">
+        
+        <ListView ScrollViewer.HorizontalScrollBarVisibility="Hidden" x:Name="lvProducts" HorizontalAlignment="Center" Grid.Row="2">
             <ListView.ItemsPanel>
                 <ItemsPanelTemplate>
                     <WrapPanel Orientation="Vertical" HorizontalAlignment="Center"></WrapPanel>
@@ -32,29 +51,36 @@
             </ListView.ItemsPanel>
             <ListView.ItemTemplate>
                 <DataTemplate>
-                    <Border BorderBrush="Black" BorderThickness="2 2 2 2" Grid.RowSpan="11" Grid.ColumnSpan="2">
-                        <Grid>
+                    <Border BorderBrush="Black" BorderThickness="2 2 2 2" Grid.RowSpan="11" Grid.ColumnSpan="2" Margin="0 20 0 0">
+                        <Grid Background="{Binding ColorProductDiscountAmount}">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition/>
                                 <ColumnDefinition/>
                                 <ColumnDefinition/>
                             </Grid.ColumnDefinitions>
 
-                            <Image Height="100" Width="200" Grid.Column="0" Source="{Binding ProductPhotoFromResources, FallbackValue={StaticResource NullImage}}" HorizontalAlignment="Center" VerticalAlignment="Center"></Image>
+                            <Border BorderBrush="Black" BorderThickness="1 1 1 1" Grid.Column="0">
+                                <Image Height="100" Width="200" Grid.Column="0" Source="{Binding ProductPhotoFromResources, FallbackValue={StaticResource NullImage}}" HorizontalAlignment="Center" VerticalAlignment="Center"></Image>
+                            </Border>
 
-                            <StackPanel Orientation="Vertical" Grid.Column="1" VerticalAlignment="Center">
-                                <TextBlock Text="{Binding ProductName}" FontSize="22" FontWeight="Bold"></TextBlock>
-                                <TextBlock Text="{Binding ProductDescription}" ></TextBlock>
-                                <TextBlock Text="Производитель:" FontWeight="Bold"></TextBlock>
-                                <TextBlock Text="{Binding ProductManufacturer.ProductManufacturerName}"></TextBlock>
-                                <TextBlock Text="Цена:" FontWeight="Bold"></TextBlock>
-                                <TextBlock Text="{Binding ProductCost}"></TextBlock>
-                            </StackPanel>
+                            <Border BorderBrush="Black" BorderThickness="1 1 1 1" Grid.RowSpan="11" Grid.Column="1">
+                                <StackPanel Orientation="Vertical" VerticalAlignment="Center" Margin="5 5 5 5">
+                                    <TextBlock Text="{Binding ProductName}" FontSize="22" FontWeight="Bold"></TextBlock>
+                                    <TextBlock Text="{Binding ProductDescription}" ></TextBlock>
+                                    <TextBlock Text="Производитель:" FontWeight="Bold"></TextBlock>
+                                    <TextBlock Text="{Binding ProductManufacturer.ProductManufacturerName}"></TextBlock>
+                                    <TextBlock Text="Цена:" FontWeight="Bold"></TextBlock>
+                                    <TextBlock Text="{Binding ProductCost}"></TextBlock>
+                                </StackPanel>
+                            </Border>
 
-                            <StackPanel Grid.Column="2" VerticalAlignment="Center">
-                                <TextBlock Text="Размер скидки:"></TextBlock>
-                                <TextBlock Text="скидка"></TextBlock>
-                            </StackPanel>
+                            <Border BorderBrush="Black" BorderThickness="1 1 1 1" Grid.RowSpan="11" Grid.Column="2">
+                                <StackPanel Grid.Column="2" VerticalAlignment="Center" Margin="5 5 5 5">
+                                    <TextBlock Text="Размер скидки:"></TextBlock>
+                                    <TextBlock Text="{Binding ProductDiscountAmount}"></TextBlock>
+                                </StackPanel>
+                            </Border>
+                            
 
                         </Grid>
                     </Border>

@@ -27,7 +27,6 @@ namespace DEMOex.Pages
     {
         private int _tickCounter = 0;
         private List<User>? _users;
-        private static int _authCount = 0;
         private DispatcherTimer _timer;
 
         public AuthPage(bool isBlocked = false)
@@ -74,12 +73,8 @@ namespace DEMOex.Pages
             }
             else
             {
-                if (_authCount > 0)
-                {
-                    AuthNavigationManager.AuthFrame.Navigate(new CaptchaPage(userToAuth));
-                }
+                AuthNavigationManager.AuthFrame.Navigate(new CaptchaPage(userToAuth));
                 textError.Text = "Неверное имя пользователя или пароль";
-                _authCount++;
             }
         }
     }

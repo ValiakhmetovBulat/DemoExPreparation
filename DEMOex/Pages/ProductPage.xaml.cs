@@ -2,6 +2,7 @@
 using DEMOex.Models.Entities;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -31,6 +32,9 @@ namespace DEMOex.Pages
             _products = ProductDbContext.GetContext().Products.ToList();
             lvProducts.ItemsSource = _products;
             _authUser = user;
+
+            tbFrom.Text = _products.Count.ToString();
+            tbTo.Text = _products.Count.ToString();
             
             ComboBoxFilterProductDiscountAmount.ItemsSource = new List<string>
             {
@@ -47,56 +51,90 @@ namespace DEMOex.Pages
 
         private void ComboBoxFilterProductDiscountAmount_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            sortProducts();
+        }
+
+        private void ComboBoxFilterProductByPrice_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            sortProducts();
+        }
+
+        private void tbSearch_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            sortProducts();
+        }
+
+        private void sortProducts()
+        {
+            var sorted = _products;
+
+            sorted = sortByPrice(sorted);
+            sorted = sortByDiscount(sorted);
+            sorted = sortBySearch(sorted);
+
+            lvProducts.ItemsSource = sorted;
+            tbFrom.Text = sorted.Count.ToString();
+        }
+
+        private List<Product> sortByPrice(List<Product> products)
+        {
             switch (ComboBoxFilterProductDiscountAmount.SelectedIndex)
             {
                 case 0:
                     {
-                        lvProducts.ItemsSource = _products.ToList();
                         break;
                     }
                 case 1:
                     {
-                        lvProducts.ItemsSource = _products.Where(p => p.ProductDiscountAmount < 10).ToList();
+                        products = products.Where(p => p.ProductDiscountAmount < 10).ToList();
                         break;
                     }
                 case 2:
                     {
-                        lvProducts.ItemsSource = _products.Where(p => p.ProductDiscountAmount > 10 && p.ProductDiscountAmount < 15).ToList();
+                        products = products.Where(p => p.ProductDiscountAmount > 10 && p.ProductDiscountAmount < 15).ToList();
                         break;
                     }
                 case 3:
                     {
-                        lvProducts.ItemsSource = _products.Where(p => p.ProductDiscountAmount > 15).ToList();
+                        products = products.Where(p => p.ProductDiscountAmount > 15).ToList();
                         break;
                     }
-            }            
+            }
+
+            return products;
         }
 
-        private void ComboBoxFilterProductByPrice_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private List<Product> sortByDiscount(List<Product> products)
         {
             switch (ComboBoxFilterProductByPrice.SelectedIndex)
             {
                 case 0:
                     {
-                        lvProducts.ItemsSource = _products.ToList();
                         break;
                     }
                 case 1:
                     {
-                        lvProducts.ItemsSource = _products.Where(p => p.ProductDiscountAmount < 10).ToList();
+                        products = products.OrderBy(p => p.ProductCost).ToList();
                         break;
                     }
                 case 2:
                     {
-                        lvProducts.ItemsSource = _products.Where(p => p.ProductDiscountAmount > 10 && p.ProductDiscountAmount < 15).ToList();
-                        break;
-                    }
-                case 3:
-                    {
-                        lvProducts.ItemsSource = _products.Where(p => p.ProductDiscountAmount > 15).ToList();
+                        products = products.OrderByDescending(p => p.ProductCost).ToList();
                         break;
                     }
             }
+
+            return products;
+        }
+
+        private List<Product> sortBySearch(List<Product> products)
+        {
+            if (!(string.IsNullOrWhiteSpace(tbSearch.Text)))
+            {
+                products = products.FindAll(p => p.ProductName.Contains(tbSearch.Text));
+            }
+
+            return products;
         }
     }
 }

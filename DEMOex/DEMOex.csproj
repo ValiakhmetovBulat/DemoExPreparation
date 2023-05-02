@@ -17,6 +17,8 @@
     <None Remove="Resources\F937G4.jpg" />
     <None Remove="Resources\G403T5.jpg" />
     <None Remove="Resources\G598Y6.jpg" />
+    <None Remove="Resources\icon.ico" />
+    <None Remove="Resources\logo.png" />
     <None Remove="Resources\picture.png" />
     <None Remove="Resources\А112Т4.jpg" />
   </ItemGroup>
@@ -27,6 +29,7 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Proxies" Version="7.0.5" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="7.0.5" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="7.0.5">
       <PrivateAssets>all</PrivateAssets>
@@ -44,6 +47,8 @@
     <Resource Include="Resources\F937G4.jpg" />
     <Resource Include="Resources\G403T5.jpg" />
     <Resource Include="Resources\G598Y6.jpg" />
+    <Resource Include="Resources\icon.ico" />
+    <Resource Include="Resources\logo.png" />
     <Resource Include="Resources\picture.png" />
     <Resource Include="Resources\А112Т4.jpg" />
   </ItemGroup>

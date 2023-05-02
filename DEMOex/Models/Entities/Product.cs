@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
+using System.Windows.Media;
 
 namespace DEMOex.Models.Entities;
 
@@ -40,4 +42,10 @@ public partial class Product
     public virtual ProductSupplier ProductSupplier { get; set; } = null!;
 
     public virtual UnitType UnitType { get; set; } = null!;
+
+    [NotMapped]
+    public SolidColorBrush ColorProductDiscountAmount => ProductDiscountAmount > 15 ? new SolidColorBrush((System.Windows.Media.Color)ColorConverter.ConvertFromString("#7fff00")) : new SolidColorBrush(System.Windows.Media.Color.FromArgb(0, 0, 0, 0));
+    
+    [NotMapped]
+    public string? ProductPhotoFromResources => "/Resources/" + ProductPhoto;
 }
