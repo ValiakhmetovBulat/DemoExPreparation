@@ -10,4 +10,9 @@ public partial class ProductCategory
     public string ProductCategoryName { get; set; } = null!;
 
     public virtual ICollection<Product> Products { get; set; } = new List<Product>();
+
+    public override string ToString()
+    {
+        return $"|{ProductCategoryId}| {ProductCategoryName}";
+    }
 }

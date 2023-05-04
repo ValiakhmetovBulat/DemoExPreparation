@@ -10,4 +10,9 @@ public partial class ProductManufacturer
     public string ProductManufacturerName { get; set; } = null!;
 
     public virtual ICollection<Product> Products { get; set; } = new List<Product>();
+
+    public override string ToString()
+    {
+        return $"|{ProductManufacturerId}| {ProductManufacturerName}";
+    }
 }

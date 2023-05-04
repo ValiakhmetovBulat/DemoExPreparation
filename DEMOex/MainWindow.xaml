@@ -8,19 +8,14 @@
         Icon="/Resources/icon.ico"
         Title="MainWindow">
     <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="60"/>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="60"/>
-        </Grid.RowDefinitions>
 
-        <Grid Grid.Row="0" Background="{StaticResource MainGreen}"/>
+
 
         <Frame Name="MainFrame" Grid.Row="1" NavigationUIVisibility="Hidden">
 
         </Frame>
 
-        <Grid Grid.Row="2" Background="{StaticResource MainGreen}"/>
+        
 
     </Grid>
 </Window>

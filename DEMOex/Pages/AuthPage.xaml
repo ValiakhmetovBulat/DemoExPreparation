@@ -17,12 +17,12 @@
 
         <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
             <Label Content="Логин"></Label>
-            <TextBox x:Name="tbLogin" Text="loginDEjrm2018"></TextBox>
+            <TextBox x:Name="tbLogin" Text="loginDEpxl2018"></TextBox>
         </StackPanel>
 
         <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="1">
             <Label Content="Пароль"></Label>
-            <TextBox x:Name="tbPassword" Text="Cpb+Im"></TextBox>
+            <TextBox x:Name="tbPassword" Text="P6h4Jq"></TextBox>
         </StackPanel>
 
         <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="2">

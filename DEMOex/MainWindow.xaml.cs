@@ -32,7 +32,15 @@ namespace DEMOex
             MainNavigationManager.MainWindow = this;
 
             _user = user;
-            MainNavigationManager.MainFrame.Navigate(new ProductPage(_user));
+            if (_user.Role.RoleName == "Администратор")
+            {
+                MainNavigationManager.MainFrame.Navigate(new AdminPage(_user));
+            }
+            else
+            {
+                MainNavigationManager.MainFrame.Navigate(new ProductPage(_user));
+            }
+           
         }
     }
 }

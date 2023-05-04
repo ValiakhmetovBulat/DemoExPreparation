@@ -1,9 +1,9 @@
 ﻿using DEMOex.Helpers;
 using DEMOex.Models;
 using DEMOex.Models.Entities;
+using DEMOex.Navigation;
 using System;
 using System.Collections.Generic;
-using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -18,25 +18,24 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 namespace DEMOex.Pages
-{
+{   
     /// <summary>
-    /// Логика взаимодействия для ProductPage.xaml
+    /// Логика взаимодействия для AdminPage.xaml
     /// </summary>
-    public partial class ProductPage : Page
+    public partial class AdminPage : Page
     {
-        private User _authUser;
+        private User _user;
         private List<Product> _products;
 
-        public ProductPage(User user)
+        public AdminPage(User user)
         {
             InitializeComponent();
             _products = ProductDbContext.GetContext().Products.ToList();
             lvProducts.ItemsSource = _products;
-            _authUser = user;
 
             tbFrom.Text = _products.Count.ToString();
             tbTo.Text = _products.Count.ToString();
-            
+
             ComboBoxFilterProductDiscountAmount.ItemsSource = new List<string>
             {
                 "Все", "0-10%", "10-15%", "15-∞%"
@@ -75,6 +74,16 @@ namespace DEMOex.Pages
 
             lvProducts.ItemsSource = sorted;
             tbFrom.Text = sorted.Count.ToString();
-        }        
+        }
+
+        private void btnAddProduct_Click(object sender, RoutedEventArgs e)
+        {
+            MainNavigationManager.MainFrame.Navigate(new AddEditProductPage(new Product()));
+        }
+
+        private void btnEditProduct_Click(object sender, RoutedEventArgs e)
+        {
+            MainNavigationManager.MainFrame.Navigate(new AddEditProductPage((sender as Button).DataContext as Product));
+        }
     }
 }

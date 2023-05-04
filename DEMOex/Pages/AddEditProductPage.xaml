@@ -1,0 +1,82 @@
+﻿<Page x:Class="DEMOex.Pages.AddEditProductPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:DEMOex.Pages"
+      mc:Ignorable="d" 
+      MinHeight="450" MinWidth="600"
+      Title="AddEditProductPage">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+
+        <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
+            <Label Content="Артикул"/>
+            <TextBox x:Name="tbProductArticleNumber" Text="{Binding ProductArticleNumber}"></TextBox>
+        </StackPanel>
+
+        <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Row="1">
+            <Label Content="Наименование"/>
+            <TextBox x:Name="tbProductName" Text="{Binding ProductName}"></TextBox>
+        </StackPanel>
+
+        <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Row="2">
+            <Label Content="Категория"/>
+            <ComboBox x:Name="comboCategory"></ComboBox>
+        </StackPanel>
+
+        <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Column="1">
+            <Label Content="Количество на складе"/>
+            <TextBox x:Name="tbQuantityInStock" Text="{Binding ProductQuantityInStock}"></TextBox>
+        </StackPanel>
+
+        <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Row="1" Grid.Column="1">
+            <Label Content="Единица измерения"/>
+            <ComboBox x:Name="comboUnitType"></ComboBox>
+        </StackPanel>
+
+        <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Row="2" Grid.Column="1">
+            <Label Content="Поставщик"/>
+            <ComboBox x:Name="comboSupplier"></ComboBox>
+        </StackPanel>
+
+        <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Row="0" Grid.Column="2">
+            <Label Content="Производитель"/>
+            <ComboBox x:Name="comboManufacturer"></ComboBox>
+        </StackPanel>
+
+        <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Row="1" Grid.Column="2">
+            <Label Content="Максимальная скидка"/>
+            <TextBox x:Name="tbProductMaxDiscountAmount" Text="{Binding ProductMaxDiscountAmount}"></TextBox>
+        </StackPanel>
+
+        <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Row="2" Grid.Column="2">
+            <Label Content="Текущая скидка"/>
+            <TextBox x:Name="tbProductDiscountAmount" Text="{Binding ProductDiscountAmount}"></TextBox>
+        </StackPanel>
+
+        <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Row="3" Grid.Column="0">
+            <Label Content="Стоимость за единицу"/>
+            <TextBox x:Name="tbProductCost" Text="{Binding ProductCost}"></TextBox>
+        </StackPanel>
+
+        <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="2">
+            <Label Content="Описание"/>
+            <TextBox x:Name="rtbProductDescription" Height="85" Width="600" TextWrapping="Wrap" FontFamily="Comic Sans MS" FontSize="16" Text="{Binding ProductDescription}"></TextBox>
+        </StackPanel>
+
+        <Button x:Name="btnSave" Click="btnSave_Click" Content="Сохранить" Grid.Row="4" Grid.Column="1" HorizontalAlignment="Center"></Button>
+    </Grid>
+</Page>

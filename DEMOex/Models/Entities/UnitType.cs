@@ -10,4 +10,9 @@ public partial class UnitType
     public string? UnitTypeName { get; set; }
 
     public virtual ICollection<Product> Products { get; set; } = new List<Product>();
+
+    public override string ToString()
+    {
+        return $"{UnitTypeName}";
+    }
 }
