@@ -99,7 +99,7 @@
         <Rectangle Fill="{StaticResource MainGreen}" Grid.Row="3"/>
         <StackPanel Grid.Row="3" Orientation="Horizontal"  HorizontalAlignment="Center" Margin="0 20 0 20">
             <Button Margin="0 0 20 0" Content="Добавить" x:Name="btnAddProduct" Click="btnAddProduct_Click"></Button>
-            <Button Content="Удалить" ></Button>
+            <Button Content="Удалить" x:Name="btnDeleteProudct" Click="btnDeleteProudct_Click"></Button>
         </StackPanel>
     </Grid>
 </Page>

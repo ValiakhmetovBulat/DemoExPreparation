@@ -69,8 +69,8 @@ namespace DEMOex.Pages
         {
             var sorted = _products;
 
-            sorted = ProductSotring.SortByPrice(sorted, ComboBoxFilterProductByPrice);
-            sorted = ProductSotring.SortByDiscount(sorted, ComboBoxFilterProductDiscountAmount);
+            sorted = ProductSotring.SortByPrice(sorted, ComboBoxFilterProductByPrice.SelectedIndex);
+            sorted = ProductSotring.SortByDiscount(sorted, ComboBoxFilterProductDiscountAmount.SelectedIndex);
             sorted = ProductSotring.SortBySearch(sorted, tbSearch);
 
             lvProducts.ItemsSource = sorted;

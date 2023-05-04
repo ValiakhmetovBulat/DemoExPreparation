@@ -2,23 +2,13 @@
 using DEMOex.Models;
 using DEMOex.Models.Entities;
 using DEMOex.Navigation;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace DEMOex.Pages
-{   
+{
     /// <summary>
     /// Логика взаимодействия для AdminPage.xaml
     /// </summary>
@@ -68,8 +58,8 @@ namespace DEMOex.Pages
         {
             var sorted = _products;
 
-            sorted = ProductSotring.SortByPrice(sorted, ComboBoxFilterProductByPrice);
-            sorted = ProductSotring.SortByDiscount(sorted, ComboBoxFilterProductDiscountAmount);
+            sorted = ProductSotring.SortByPrice(sorted, ComboBoxFilterProductByPrice.SelectedIndex);
+            sorted = ProductSotring.SortByDiscount(sorted, ComboBoxFilterProductDiscountAmount.SelectedIndex);
             sorted = ProductSotring.SortBySearch(sorted, tbSearch);
 
             lvProducts.ItemsSource = sorted;
@@ -78,12 +68,33 @@ namespace DEMOex.Pages
 
         private void btnAddProduct_Click(object sender, RoutedEventArgs e)
         {
-            MainNavigationManager.MainFrame.Navigate(new AddEditProductPage(new Product()));
+            MainNavigationManager.MainFrame.Navigate(new AddEditProductPage(new Product(), this));
         }
 
         private void btnEditProduct_Click(object sender, RoutedEventArgs e)
         {
-            MainNavigationManager.MainFrame.Navigate(new AddEditProductPage((sender as Button).DataContext as Product));
+            MainNavigationManager.MainFrame.Navigate(new AddEditProductPage((sender as Button).DataContext as Product, this));
+        }
+
+        private void btnDeleteProudct_Click(object sender, RoutedEventArgs e)
+        {
+            var selectedProduct = lvProducts.SelectedItems.Cast<Product>().ToList();
+
+            if (selectedProduct.Count == 0)
+            {
+                MessageBox.Show("Выберите товар, который желаете удалить нажатием на карточку");
+                return;
+            }
+            if ((MessageBox.Show("Выбранный товар будет удален. Продолжить?", "Удаление товара", MessageBoxButton.YesNo, MessageBoxImage.Question)) == MessageBoxResult.Yes)
+            {                
+                var db = ProductDbContext.GetContext();
+                db.Products.RemoveRange(selectedProduct);
+                db.SaveChanges();
+                MessageBox.Show("Товар был успешно удален");
+                _products = db.Products.ToList();
+                lvProducts.ItemsSource = _products;
+                sortProducts();
+            }
         }
     }
 }

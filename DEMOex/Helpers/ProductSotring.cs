@@ -10,9 +10,9 @@ namespace DEMOex.Helpers
 {
     public class ProductSotring
     {
-        public static List<Product> SortByPrice(List<Product> products, ComboBox combo)
+        public static List<Product> SortByDiscount(List<Product> products, int index)
         {
-            switch (combo.SelectedIndex)
+            switch (index)
             {
                 case 0:
                     {
@@ -38,9 +38,9 @@ namespace DEMOex.Helpers
             return products;
         }
 
-        public static List<Product> SortByDiscount(List<Product> products, ComboBox combo)
+        public static List<Product> SortByPrice(List<Product> products, int index)
         {
-            switch (combo.SelectedIndex)
+            switch (index)
             {
                 case 0:
                     {
