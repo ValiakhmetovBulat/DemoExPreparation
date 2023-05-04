@@ -8,7 +8,7 @@
       MinHeight="450" MinWidth="600"
       Title="AddEditProductPage">
 
-    <Grid>
+    <Grid x:Name="addEditGrid">
         <Grid.RowDefinitions>
             <RowDefinition/>
             <RowDefinition/>
@@ -74,9 +74,12 @@
 
         <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="2">
             <Label Content="Описание"/>
-            <TextBox x:Name="rtbProductDescription" Height="85" Width="600" TextWrapping="Wrap" FontFamily="Comic Sans MS" FontSize="16" Text="{Binding ProductDescription}"></TextBox>
+            <TextBox x:Name="rtbProductDescription" Height="85" Width="700" TextWrapping="Wrap" FontFamily="Comic Sans MS" FontSize="16" Text="{Binding ProductDescription}"></TextBox>
         </StackPanel>
 
-        <Button x:Name="btnSave" Click="btnSave_Click" Content="Сохранить" Grid.Row="4" Grid.Column="1" HorizontalAlignment="Center"></Button>
+        <StackPanel Grid.Row="4" Grid.Column="1" Orientation="Horizontal">
+            <Button x:Name="btnReturnToProductPage" Click="btnReturnToProductPage_Click"  Content="Отмена" Margin="0 0 20 0" HorizontalAlignment="Center"></Button>
+            <Button x:Name="btnSave" Click="btnSave_Click" Content="Сохранить" HorizontalAlignment="Center"></Button>
+        </StackPanel>        
     </Grid>
 </Page>
