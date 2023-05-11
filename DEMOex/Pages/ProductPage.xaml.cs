@@ -1,6 +1,7 @@
 ﻿using DEMOex.Helpers;
 using DEMOex.Models;
 using DEMOex.Models.Entities;
+using DEMOex.Navigation;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
@@ -26,6 +27,8 @@ namespace DEMOex.Pages
     {
         private User _authUser;
         private List<Product> _products;
+        private Order _order = new Order();
+        private List<OrderProduct> _orderedProducts = new List<OrderProduct>();
 
         public ProductPage(User user)
         {
@@ -33,6 +36,9 @@ namespace DEMOex.Pages
             _products = ProductDbContext.GetContext().Products.ToList();
             lvProducts.ItemsSource = _products;
             _authUser = user;
+            
+            _order.UserId = _authUser.UserId;
+            _order.OrderStatusId = 1;
 
             tbFrom.Text = _products.Count.ToString();
             tbTo.Text = _products.Count.ToString();
@@ -75,6 +81,45 @@ namespace DEMOex.Pages
 
             lvProducts.ItemsSource = sorted;
             tbFrom.Text = sorted.Count.ToString();
-        }        
+        }
+
+        private void btnAddProductToOrder_Click(object sender, RoutedEventArgs e)
+        {
+            var selectedProducts = lvProducts.SelectedItems.Cast<Product>().ToList();
+
+            if (selectedProducts.Count == 0)
+            {
+                MessageBox.Show("Выберите товар, который желаете заказать нажатием на карточку");
+                return;
+            }
+
+            foreach (var item in selectedProducts)
+            {
+                var productToAdd = _orderedProducts.Find(o => o.ProductId == item.ProductId);
+                if (productToAdd == null)
+                {
+                    OrderProduct newOrderProduct = new OrderProduct
+                    {
+                        OrderId = _order.OrderId,
+                        Product = item,
+                        ProductId = item.ProductId,
+                        Count = 1
+                    };
+                    _orderedProducts.Add(newOrderProduct);
+                }
+                else
+                {
+                    _orderedProducts.Find(o => o.ProductId == item.ProductId).Count++;
+                }
+            }
+
+            MessageBox.Show("Продукт был добавлен в заказ");
+            btnGoToCart.Visibility = Visibility.Visible;
+        }
+
+        private void btnGoToCart_Click(object sender, RoutedEventArgs e)
+        {
+            MainNavigationManager.MainFrame.Navigate(new CartPage(_orderedProducts, _order));
+        }
     }
 }

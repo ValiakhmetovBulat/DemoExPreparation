@@ -48,4 +48,7 @@ public partial class Product
     
     [NotMapped]
     public string? ProductPhotoFromResources => "/Resources/" + ProductPhoto;
+
+    [NotMapped]
+    public decimal? ProductDiscountCost => ProductCost - ((ProductCost / 100) * ProductDiscountAmount);
 }

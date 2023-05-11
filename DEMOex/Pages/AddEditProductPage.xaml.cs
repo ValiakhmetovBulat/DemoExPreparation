@@ -80,6 +80,12 @@ namespace DEMOex.Pages
                     errors.AppendLine($"Поле: {item.Name} не может быть пустым");
                 }
             }
+            var isMaxDiscountDigit = Int32.TryParse(tbProductMaxDiscountAmount.Text, out var maxDiscount);
+            var isDiscountDigit = Int32.TryParse(tbProductDiscountAmount.Text, out var discount);
+            if (maxDiscount < discount)
+            {
+                errors.AppendLine("Размер текущей скидки не должен превышать максимальную скидку");
+            }
 
             if (errors.Length > 0)
             {

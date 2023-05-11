@@ -94,6 +94,7 @@ namespace DEMOex.Pages
                 _products = db.Products.ToList();
                 lvProducts.ItemsSource = _products;
                 sortProducts();
+                tbTo.Text = _products.Count.ToString();
             }
         }
     }

@@ -77,7 +77,10 @@
                                     <TextBlock Text="Производитель:" FontWeight="Bold"></TextBlock>
                                     <TextBlock Text="{Binding ProductManufacturer.ProductManufacturerName}"></TextBlock>
                                     <TextBlock Text="Цена:" FontWeight="Bold"></TextBlock>
-                                    <TextBlock Text="{Binding ProductCost}"></TextBlock>
+                                    <StackPanel>
+                                        <TextBlock TextDecorations="Strikethrough" Text="{Binding ProductCost}"></TextBlock>
+                                        <TextBlock Text="{Binding ProductDiscountCost}"></TextBlock>
+                                    </StackPanel>                                    
                                 </StackPanel>
                             </Border>
 

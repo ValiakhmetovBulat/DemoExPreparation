@@ -19,16 +19,19 @@
             <RowDefinition Height="auto"/>
             <RowDefinition Height="auto"/>
             <RowDefinition Height="*"/>
+            <RowDefinition Height="auto"/>
         </Grid.RowDefinitions>
+        <Rectangle Fill="{StaticResource MainGreen}" Grid.Row="0"/>
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0 0 0 20">
 
             <TextBlock x:Name="tbFrom" Text="0"/>
             <TextBlock Text=" из "/>
             <TextBlock x:Name="tbTo" Text="100"/>
 
-        </StackPanel>        
+        </StackPanel>       
         
-        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Grid.Row="1">                      
+        <Rectangle Fill="{StaticResource MainGreen}" Grid.Row="1"/>
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Grid.Row="1" Margin="0 0 0 20">                      
             <StackPanel Orientation="Vertical" HorizontalAlignment="Left" Margin="0 0 100 0">
                 <TextBlock Text="Сортировка" HorizontalAlignment="Center" FontSize="22" FontWeight="Bold"/>
                 <TextBlock Text="по размеру скидки: " VerticalAlignment="Center"/>
@@ -70,7 +73,10 @@
                                     <TextBlock Text="Производитель:" FontWeight="Bold"></TextBlock>
                                     <TextBlock Text="{Binding ProductManufacturer.ProductManufacturerName}"></TextBlock>
                                     <TextBlock Text="Цена:" FontWeight="Bold"></TextBlock>
-                                    <TextBlock Text="{Binding ProductCost}"></TextBlock>
+                                    <StackPanel>
+                                        <TextBlock TextDecorations="Strikethrough" Text="{Binding ProductCost}"></TextBlock>
+                                        <TextBlock Text="{Binding ProductDiscountCost}"></TextBlock>
+                                    </StackPanel>
                                 </StackPanel>
                             </Border>
 
@@ -81,11 +87,15 @@
                                 </StackPanel>
                             </Border>
                             
-
+                            
                         </Grid>
                     </Border>
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
+        <StackPanel Grid.Row="3" Orientation="Horizontal"  HorizontalAlignment="Center" Margin="0 20 0 20">
+            <Button Margin="0 0 20 0" Content="Добавить к заказу" x:Name="btnAddProductToOrder" Click="btnAddProductToOrder_Click"></Button>
+            <Button Content="В корзину" x:Name="btnGoToCart" Click="btnGoToCart_Click" Visibility="Hidden"></Button>
+        </StackPanel>
     </Grid>
 </Page>
