@@ -27,11 +27,13 @@ namespace DEMOex.Pages
         private decimal? _totalSum;
         private decimal? _totalDiscountSum;
         private Order _order;
+        private User _user;
 
-        public CartPage(List<OrderProduct> orderedProducts, Order order)
+        public CartPage(List<OrderProduct> orderedProducts, Order order, User user)
         {
             InitializeComponent();
 
+            _user = user;
             _orderedProducts = orderedProducts;
             _order = order;
             dataGridCart.ItemsSource = _orderedProducts;
@@ -57,6 +59,12 @@ namespace DEMOex.Pages
 
         private void btnCreateOrder_Click(object sender, RoutedEventArgs e)
         {
+            if (comboPickupPoints.SelectedItem as PickupPoint == null)
+            {
+                MessageBox.Show("Выберете пункт выдачи");
+                return;
+            }
+
             var countProducts = 0;
             var db = ProductDbContext.GetContext();
 
@@ -85,7 +93,7 @@ namespace DEMOex.Pages
                     db.OrderProducts.AddRange(_orderedProducts);
                     db.SaveChanges();
 
-                    MainNavigationManager.MainFrame.Navigate(new TalonPage());
+                    MainNavigationManager.MainFrame.Navigate(new TalonPage(_order, _orderedProducts, _totalSum, _totalDiscountSum, _user));
                     return;
                 }                    
             }
@@ -110,7 +118,7 @@ namespace DEMOex.Pages
             db.OrderProducts.AddRange(_orderedProducts);
             db.SaveChanges();
 
-            MainNavigationManager.MainFrame.Navigate(new TalonPage());
+            MainNavigationManager.MainFrame.Navigate(new TalonPage(_order, _orderedProducts, _totalSum, _totalDiscountSum, _user));
         }
 
         private void btnGoBack_Click(object sender, RoutedEventArgs e)

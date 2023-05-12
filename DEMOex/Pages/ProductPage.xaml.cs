@@ -119,7 +119,7 @@ namespace DEMOex.Pages
 
         private void btnGoToCart_Click(object sender, RoutedEventArgs e)
         {
-            MainNavigationManager.MainFrame.Navigate(new CartPage(_orderedProducts, _order));
+            MainNavigationManager.MainFrame.Navigate(new CartPage(_orderedProducts, _order, _authUser));
         }
     }
 }
